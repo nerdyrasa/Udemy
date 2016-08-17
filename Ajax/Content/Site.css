@@ -1,5 +1,8 @@
 ﻿body {
-    padding-top: 50px;
+/* According to bootstrap documentation, body padding required
+The fixed navbar will overlay your other content, unless you add padding to the top of the <body>. */
+
+    padding-top: 80px;
     padding-bottom: 20px;
 }
 
