@@ -27,13 +27,21 @@ namespace Ajax.Controllers
             return View();
         }
 
-
-        public string ProcessRequest()
+        [Route("process/{userText?}")]
+        public string Process(string userText)
         {
-            string res = "";
-            if (Request.QueryString.Count > 0)
-                res = Request.QueryString[0].ToUpper();
-            return res;
+            if (userText == null)
+                return "";
+
+            return userText.ToUpper();
+        }
+
+        [HttpPost]  ///This function is in my controller class
+        public ActionResult Delete(string txtDelete)
+        {
+            int _id = Convert.ToInt32(txtDelete); // put your code   
+
+            return Content("Yes");
         }
     }
 }
