@@ -26,5 +26,14 @@ namespace Ajax.Controllers
 
             return View();
         }
+
+
+        public string ProcessRequest()
+        {
+            string res = "";
+            if (Request.QueryString.Count > 0)
+                res = Request.QueryString[0].ToUpper();
+            return res;
+        }
     }
 }
