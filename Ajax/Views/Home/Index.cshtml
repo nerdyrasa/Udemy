@@ -5,28 +5,33 @@
 
 
 <div>
-    User Text: <input type="text" id="user-text" name="user-request" class="form-control"/>
+    User Text: <input type="text" id="user-text" name="user-request" class="form-control" />
     Server Text: <input type="text" id="server-response" name="server-text" class="form-control" />
 </div>
+@*<div>
+    @using (Html.BeginForm("Delete", "Home"))
+    {
+        <button>Delete</button>
+        @Html.Label("Enter an ID number");
+        @Html.TextBox("txtDelete")
+    }
+</div>*@
 
 @section scripts
 {
     <script>
-        
+
         $("#user-text").keyup(function () {
-
             var currentText = $(this).val();
-            var data = JSON.stringify(currentText);
+            var data = "?userText=" + currentText;
 
-            $.get("/home/processrequest",
-
-                data,
-
+            $.get("/process" + data,
+                
                 function (response, status, http) {
                     $("#server-response").val(response);
                 },
-                "json");
+                "text");
         });
-          
+
     </script>
 }
