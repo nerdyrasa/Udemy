@@ -36,6 +36,14 @@ namespace Ajax.Controllers
             return userText.ToUpper();
         }
 
+        public string ConvertLowerToUpper(string input)
+        {
+            if (!String.IsNullOrEmpty(input))
+                return input.ToUpper();
+
+            return "";
+        }
+
         [HttpPost]  ///This function is in my controller class
         public ActionResult Delete(string txtDelete)
         {
@@ -43,5 +51,15 @@ namespace Ajax.Controllers
 
             return Content("Yes");
         }
+
+        public string WelcomeMsg(string input)
+        {
+            if (!String.IsNullOrEmpty(input))
+                return "Please welcome " + input + ".";
+            else
+                return "Please enter your name.";
+        }
+
+
     }
 }

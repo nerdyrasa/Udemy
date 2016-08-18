@@ -5,9 +5,18 @@
 
 
 <div>
-    User Text: <input type="text" id="user-text" name="user-request" class="form-control" />
-    Server Text: <input type="text" id="server-response" name="server-text" class="form-control" />
+    User Text: <input type="text" id="user-request" name="user-request" class="form-control" />
+    Server Text: <input type="text" id="server-response" name="server-responset" class="form-control" />
 </div>
+
+@*<p>
+    Enter your name @Html.TextBox("Name")
+    <input type="submit" id="SubmitName" value="Submit" />
+</p>
+
+<p id="rData">
+</p>*@
+
 @*<div>
     @using (Html.BeginForm("Delete", "Home"))
     {
@@ -21,17 +30,21 @@
 {
     <script>
 
-        $("#user-text").keyup(function () {
-            var currentText = $(this).val();
-            var data = "?userText=" + currentText;
-
-            $.get("/process" + data,
-                
-                function (response, status, http) {
-                    $("#server-response").val(response);
-                },
-                "text");
+        $("#user-request").keyup(function () {
+            var url = "/Home/ConvertLowerToUpper";
+            var text = $(this).val();
+            $.get(url, { input: text }, function (data) {
+                $("#server-response").val(data);
+            });
         });
+
+        $('#SubmitName').click(function () {
+            var url = "/Home/WelcomeMsg";
+            var name = $('#Name').val();
+            $.get(url, { input: name }, function (data) {
+                $("#rData").html(data);
+            });
+        })
 
     </script>
 }
