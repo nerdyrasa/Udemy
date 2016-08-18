@@ -23,6 +23,13 @@
 {
     <script>
 
+        // Both $.get and $.post methods load data from the server.
+        // See https://api.jquery.com/category/ajax/shorthand-methods/
+
+        // The GET request appends the data to the url as a query string
+
+        // More info: https://api.jquery.com/jQuery.get/
+
         $("#user-request").keyup(function () {
             var url = "/Home/ConvertLowerToUpper";
             var text = $(this).val();
@@ -31,6 +38,10 @@
             });
         });
 
+        // The POST request does not append the data to the url as a query string
+
+        // More info: https://api.jquery.com/jQuery.post/
+
         $("#user-request-post").keyup(function () {
             var url = "/Home/ConvertLowerToUpper";
             var text = $(this).val();
@@ -38,6 +49,7 @@
                 $("#server-response-post").val(data);
             });
         });
+
 
     </script>
 }
