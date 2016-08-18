@@ -1,30 +1,23 @@
 ﻿@{
-    ViewBag.Title = "Home Page";
+    ViewBag.Title = "Let the Fun Begin";
 }
 
 
-
+<h3>Using GET</h3>
 <div>
     User Text: <input type="text" id="user-request" name="user-request" class="form-control" />
-    Server Text: <input type="text" id="server-response" name="server-responset" class="form-control" />
+    Server Text: <input type="text" id="server-response" name="server-response" class="form-control" />
 </div>
-
-@*<p>
-    Enter your name @Html.TextBox("Name")
-    <input type="submit" id="SubmitName" value="Submit" />
+<h3>Using POST</h3>
+<div>
+    User Text: <input type="text" id="user-request-post" name="user-request" class="form-control" />
+    Server Text: <input type="text" id="server-response-post" name="server-response-post" class="form-control" />
+</div>
+<hr />
+<p>
+    This is an exploratory exercise. If you open the Network tab in Chrome Developer Tools, you can examine the Ajax requests and compare the GET vs. the POST.
+    I did a project that used jquery Ajax calls, but I was still a bit mystified by it, so I wanted to do this exercise to get a better understanding.
 </p>
-
-<p id="rData">
-</p>*@
-
-@*<div>
-    @using (Html.BeginForm("Delete", "Home"))
-    {
-        <button>Delete</button>
-        @Html.Label("Enter an ID number");
-        @Html.TextBox("txtDelete")
-    }
-</div>*@
 
 @section scripts
 {
@@ -38,13 +31,13 @@
             });
         });
 
-        $('#SubmitName').click(function () {
-            var url = "/Home/WelcomeMsg";
-            var name = $('#Name').val();
-            $.get(url, { input: name }, function (data) {
-                $("#rData").html(data);
+        $("#user-request-post").keyup(function () {
+            var url = "/Home/ConvertLowerToUpper";
+            var text = $(this).val();
+            $.post(url, { input: text }, function (data) {
+                $("#server-response-post").val(data);
             });
-        })
+        });
 
     </script>
 }

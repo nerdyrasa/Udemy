@@ -15,25 +15,16 @@ namespace Ajax.Controllers
 
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
+            ViewBag.Message = "Explore. Discover. Understand.";
 
             return View();
         }
 
         public ActionResult Contact()
         {
-            ViewBag.Message = "Your contact page.";
+            ViewBag.Message = "My contact info will go here eventually.";
 
             return View();
-        }
-
-        [Route("process/{userText?}")]
-        public string Process(string userText)
-        {
-            if (userText == null)
-                return "";
-
-            return userText.ToUpper();
         }
 
         public string ConvertLowerToUpper(string input)
@@ -43,23 +34,6 @@ namespace Ajax.Controllers
 
             return "";
         }
-
-        [HttpPost]  ///This function is in my controller class
-        public ActionResult Delete(string txtDelete)
-        {
-            int _id = Convert.ToInt32(txtDelete); // put your code   
-
-            return Content("Yes");
-        }
-
-        public string WelcomeMsg(string input)
-        {
-            if (!String.IsNullOrEmpty(input))
-                return "Please welcome " + input + ".";
-            else
-                return "Please enter your name.";
-        }
-
 
     }
 }
