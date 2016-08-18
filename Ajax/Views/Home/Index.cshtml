@@ -5,18 +5,28 @@
 
 <h3>Using GET</h3>
 <div>
+    <p>User enters lower case letters. Server returns it as an upper case letter.</p>
     User Text: <input type="text" id="user-request" name="user-request" class="form-control" />
     Server Text: <input type="text" id="server-response" name="server-response" class="form-control" />
 </div>
 <h3>Using POST</h3>
 <div>
+    <p>User enters lower case letters. Server returns it as an upper case letter.</p>
     User Text: <input type="text" id="user-request-post" name="user-request" class="form-control" />
     Server Text: <input type="text" id="server-response-post" name="server-response-post" class="form-control" />
 </div>
+<h3>Using PUT</h3>
+<div>
+    <p id="put-return">Press Update button to send a put request.</p>
+    <button class="js-update-object btn btn-default">Update</button>
+</div>
 <hr />
 <p>
-    This is an exploratory exercise. If you open the Network tab in Chrome Developer Tools, you can examine the Ajax requests and compare the GET vs. the POST.
+    This is an exploratory exercise. Open the Network tab in Chrome Developer Tools. Examine the Ajax requests.
     I did a project that used jquery Ajax calls, but I was still a bit mystified by it, so I wanted to do this exercise to get a better understanding.
+</p>
+<p>
+    Currently, the put is returning a 200 status code. It should be 204. I did the routing to a mvc controller, but I really should do this with a web api 2 controller. Just checking it out though.
 </p>
 
 @section scripts
@@ -42,6 +52,8 @@
 
         // More info: https://api.jquery.com/jQuery.post/
 
+        // input in this case is sent as form data and does not need to be stringified
+
         $("#user-request-post").keyup(function () {
             var url = "/Home/ConvertLowerToUpper";
             var text = $(this).val();
@@ -50,6 +62,32 @@
             });
         });
 
+        // PUT uses the $.ajax method
+        //
+        // $.ajax has many options. http://api.jquery.com/jquery.ajax/
+
+        $(".js-update-object").click(function () {
+            var obj = { "Id" : 2,
+                "BookTitle": "Do it again."
+            };
+            $.ajax(
+                {
+                    method: "PUT",
+                    url: "/UpdateBook/2",
+                    data: JSON.stringify(obj),
+                    contentType: "application/json"     // When sending data to the server, use contentType to specify the format of data sent to server. 
+                                                        // Default is "application/x-www-form-urlencoded; charset=UTF-8", which is fine for most cases 
+                })
+                .done(function (data) {
+                    console.log("success");
+                    $("#put-return").html("Put success!");
+                })
+                .fail(function (jqXHR, textStatus, err) {
+                    console.log("fail" + jqXHR)
+                });
+            });
+
+        
 
     </script>
 }

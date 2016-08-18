@@ -29,5 +29,7 @@ namespace Ajax.Models
         {
             return new ApplicationDbContext();
         }
+
+        public System.Data.Entity.DbSet<Ajax.Models.Book> Books { get; set; }
     }
 }
