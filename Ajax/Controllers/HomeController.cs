@@ -61,5 +61,17 @@ namespace Ajax.Controllers
             return "204";
         }
 
+        // More about parameter binding in Web API 
+        // http://www.asp.net/web-api/overview/formats-and-model-binding/parameter-binding-in-aspnet-web-api
+        // May not be the latest and greatest but provides an overview
+
+        [Route("Test")]
+        //public string Test([System.Web.Http.FromBody] int testId)
+        public string Test(int testId)
+        {
+
+            return "test success";
+        }
+
     }
 }

@@ -43,18 +43,13 @@ namespace Ajax.Controllers
         }
 
         // POST: api/Books
-        [ResponseType(typeof(Book))]
-        public IHttpActionResult PostBook(Book book)
+        [ResponseType(typeof(void))]
+        [HttpPost]
+        public IHttpActionResult Test(int testId)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+            // do something
 
-            db.Books.Add(book);
-            db.SaveChanges();
-
-            return CreatedAtRoute("DefaultApi", new { id = book.Id }, book);
+            return StatusCode(HttpStatusCode.NoContent);
         }
 
         // DELETE: api/Books/5
