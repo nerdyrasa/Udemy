@@ -41,11 +41,17 @@
         // More info: https://api.jquery.com/jQuery.get/
 
         $("#user-request").keyup(function () {
+
             var url = "/Home/ConvertLowerToUpper";
             var text = $(this).val();
-            $.get(url, { input: text }, function (data) {
-                $("#server-response").val(data);
-            });
+            
+            $.get( url, { input: text } )
+                .done(function (data) {
+                    $("#server-response").val(data);
+                })
+                .fail(function () {
+                    console.log("Fail.")
+                });
         });
 
         // The POST request does not append the data to the url as a query string
@@ -55,18 +61,28 @@
         // input in this case is sent as form data and does not need to be stringified
 
         $("#user-request-post").keyup(function () {
+
             var url = "/Home/ConvertLowerToUpper";
             var text = $(this).val();
-            $.post(url, { input: text }, function (data) {
-                $("#server-response-post").val(data);
+
+            $.post(url, { input: text })
+                .done(function (data) {
+                    $("#server-response-post").val(data);
+                })
+                .fail(function(){
+                    console.log("Fail.")
+                });
             });
-        });
+       
 
         // PUT uses the $.ajax method
         //
         // $.ajax has many options. http://api.jquery.com/jquery.ajax/
 
-        $(".js-update-object").click(function () {
+        $(".js-update-object").click(function (e) {
+
+            var button = $(e.target);
+            
             var obj = { "Id" : 2,
                 "BookTitle": "Do it again."
             };
@@ -80,14 +96,13 @@
                 })
                 .done(function (data) {
                     console.log("success");
+                    button.removeClass("btn-default").addClass("btn-success").text("Yes!");
                     $("#put-return").html("Put success!");
                 })
                 .fail(function (jqXHR, textStatus, err) {
-                    console.log("fail" + jqXHR)
+                    console.log("fail " + jqXHR)
                 });
             });
-
-        
 
     </script>
 }
