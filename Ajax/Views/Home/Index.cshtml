@@ -18,7 +18,9 @@
 <h3>Using PUT</h3>
 <div>
     <p id="put-return">Press Update button to send a put request.</p>
-    <button class="js-update-object btn btn-default">Update</button>
+    <button class="js-update-object btn btn-default" test-data-attr='{ "id": "2", "text": "this is a test" }'>
+        Update
+    </button>
 </div>
 <hr />
 <p>
@@ -83,6 +85,13 @@
 
             var button = $(e.target);
             
+            var testAttribute = button.attr("test-data-attr");
+
+            var jsonObj = $.parseJSON(testAttribute);//parse JSON
+
+            console.log(jsonObj.id);
+            console.log(jsonObj.text);
+
             var obj = { "Id" : 2,
                 "BookTitle": "Do it again."
             };
